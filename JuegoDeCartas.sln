@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuegoDeCartas", "JuegoDeCartas\JuegoDeCartas.csproj", "{44887E80-EDBD-45DC-94E9-B490A532E676}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44887E80-EDBD-45DC-94E9-B490A532E676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44887E80-EDBD-45DC-94E9-B490A532E676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44887E80-EDBD-45DC-94E9-B490A532E676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44887E80-EDBD-45DC-94E9-B490A532E676}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22748EC0-368F-41B3-AB98-D047E08EC2C9}
+	EndGlobalSection
+EndGlobal
