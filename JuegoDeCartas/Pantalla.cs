@@ -50,8 +50,8 @@ namespace JuegoDeCartas {
                 Console.SetCursorPosition(125, pos);
                 Console.WriteLine(Torrecita[i]);
             }
+            Console.WriteLine(Jugador.playerHP);
+            Console.WriteLine(Jugador.botHP);
         }
-
-
     }
 }

@@ -5,7 +5,7 @@ using System.Collections;
 namespace JuegoDeCartas {
     class Bot : Jugador {
         static int botCard;
-        public static void UseBotCard() {
+        public static int UseBotCard() {
             int y = 5;
             for (int row = 2; row < 14; row++) {
                 Console.SetCursorPosition(100, y);
@@ -13,6 +13,7 @@ namespace JuegoDeCartas {
                 y++;
             }
             botCard++;
+            return botCard - 1;
         }
     }
 }
