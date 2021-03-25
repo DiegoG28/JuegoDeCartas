@@ -7,7 +7,7 @@ using System.IO;
 namespace JuegoDeCartas {
     class Mazo {
         public static ArrayList shuffledDeck = new ArrayList();
-        public static int totalCards = 20;
+        public static int totalCards = 10;
         public static string[,] deck = new string[20, totalCards];
 
         public void ReadCards() {

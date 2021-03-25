@@ -8,8 +8,6 @@ namespace JuegoDeCartas {
     class Jugador : Mazo {
         ArrayList deckP1 = new ArrayList();
         public static ArrayList deckP2 = new ArrayList();
-        public static int playerHP=4000;
-        public static int botHP=4000;
 
         public Jugador() {
             Console.CursorVisible = false;
@@ -30,21 +28,16 @@ namespace JuegoDeCartas {
             Console.ForegroundColor = ConsoleColor.Blue;
             int x = 7;
             int y = 28;//posiciones iniciales en las que se dibujará la baraja, estos valores los seguiremos usando después.
-            int c = 0;
             foreach (int idCard in deckP1) {
-                if (c < 7) {
-                    for (int row = 2; row < 14; row++) {
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine(deck[row, idCard]);
-                        y++;
-                    }
-                    c++;
+                for (int row = 2; row < 14; row++) {
+                    Console.SetCursorPosition(x, y);
+                    Console.WriteLine(deck[row, idCard]);
+                    y++;
                 }
-                x = x + 20;
+                x = x + 19;
                 y = 28;
                 Console.ForegroundColor = ConsoleColor.White;
             }
-        
             ReadUserKey();
         }
 
@@ -54,7 +47,7 @@ namespace JuegoDeCartas {
             do {
                 tecla = Console.ReadKey(true);
                 if (tecla.Key == ConsoleKey.RightArrow) {
-                    if (selectedCard < 6) {//Esta condición es para que selectedCard NO tome un valor mayor al index del array deckP1
+                    if (selectedCard < deckP1.Count - 1) {//Esta condición es para que selectedCard NO tome un valor mayor al index del array deckP1
                         selectedCard++;
                         FocusIn(selectedCard);
                     }
@@ -75,10 +68,9 @@ namespace JuegoDeCartas {
         public void FocusIn(int selectedCard) {
             int y = 28;
             int index = 0;
-            int c = 0;
             Console.ForegroundColor = ConsoleColor.Blue;
             for (int row = 2; row < 14; row++) {
-                Console.SetCursorPosition(selectedCard * 20+7, y);//Esto nos sirve para cambiar el valor de x en función a la carta que ha sido seleccionada
+                Console.SetCursorPosition(selectedCard * 19+7, y);//Esto nos sirve para cambiar el valor de x en función a la carta que ha sido seleccionada
                 Console.WriteLine(deck[row, (int)deckP1[selectedCard]]);//Tomamos el valor de deckP1 en la posición selectedCard, esto ayudará a deck a saber que carta imprimir
                 y++;
             }
@@ -86,40 +78,35 @@ namespace JuegoDeCartas {
             foreach (int idCard in deckP1) {
                 y = 28;
                 Console.ForegroundColor = ConsoleColor.White;
-                if (c < 7) {
-                    if (index != selectedCard) {//Si el index = selectedCard, no entrará a esta condición, pues no queremos que la carta seleccionada se pinte blanco.
-                        for (int row = 2; row < 14; row++) {
-                            Console.SetCursorPosition(index * 20 + 7, y);//En este caso, x tomará valores en función a las cartas que NO están siendo seleccionadas.
-                            Console.WriteLine(deck[row, idCard]);//Nos ayudamos con el foreach para ir imprimiendo las cartas no seleccionadas en color blanco.
-                            y++;
-                        }
+                if (index != selectedCard) {//Si el index = selectedCard, no entrará a esta condición, pues no queremos que la carta seleccionada se pinte blanco.
+                    for (int row = 2; row < 14; row++) {
+                        Console.SetCursorPosition(index * 19+7, y);//En este caso, x tomará valores en función a las cartas que NO están siendo seleccionadas.
+                        Console.WriteLine(deck[row, idCard]);//Nos ayudamos con el foreach para ir imprimiendo las cartas no seleccionadas en color blanco.
+                        y++;
                     }
-                    c++;
                 }
                 index++;
             }
         }
 
-        public void UseCard(int selectedCard) {
+        public void UseCard(int SelectedCard) {
             int y = 5;
             Console.ForegroundColor = ConsoleColor.White;
             Thread.Sleep(1000);
             for (int row = 2; row < 14; row++) {
                 Console.SetCursorPosition(30, y);
-                Console.WriteLine(deck[row, (int)deckP1[selectedCard]]);
+                Console.WriteLine(deck[row, (int)deckP1[SelectedCard]]);
                 y++;
             }
-            Thread.Sleep(1000);
-            Combate battle = new Combate((int)deckP1[selectedCard], (int)deckP2[Bot.UseBotCard()]);//Básicamente pasamos las cartas seleccionadas por el usuario y el bot
-            deckP1.RemoveAt(selectedCard);
-            
-
+            deckP1.RemoveAt(SelectedCard);
             UpdateScreen();
         }
 
         public void UpdateScreen() {
             Pantalla pantalla = new Pantalla();
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
+            Bot.UseBotCard();
+            Thread.Sleep(1000);
             Console.Clear();
             pantalla.InGame();
             ShowCardsP1();
