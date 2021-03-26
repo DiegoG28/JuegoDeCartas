@@ -8,7 +8,7 @@ namespace JuegoDeCartas {
     class Jugador : Mazo {
         ArrayList deckP1 = new ArrayList();
         public static ArrayList deckP2 = new ArrayList();
-        public static int playerHP=4000;
+        public static int playerHP=2000;
         public static int botHP=4000;
 
         public Jugador() {
@@ -29,23 +29,28 @@ namespace JuegoDeCartas {
         public void ShowCardsP1() {
             Console.ForegroundColor = ConsoleColor.Blue;
             int x = 7;
-            int y = 28;//posiciones iniciales en las que se dibujará la baraja, estos valores los seguiremos usando después.
+            int y = 29;//posiciones iniciales en las que se dibujará la baraja, estos valores los seguiremos usando después.
             int c = 0;
-            foreach (int idCard in deckP1) {
-                if (c < 7) {
-                    for (int row = 2; row < 14; row++) {
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine(deck[row, idCard]);
-                        y++;
+            if (deckP1.Count != 0) {
+                foreach (int idCard in deckP1) {
+                    if (c < 7) {
+                        for (int row = 2; row < 14; row++) {
+                            Console.SetCursorPosition(x, y);
+                            Console.WriteLine(deck[row, idCard]);
+                            y++;
+                        }
+                        c++;
                     }
-                    c++;
+                    x = x + 20;
+                    y = 29;
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
-                x = x + 20;
-                y = 28;
-                Console.ForegroundColor = ConsoleColor.White;
+
+                ReadUserKey();
+            } else {
+                Console.Clear();
+                Console.WriteLine("En construcción...");
             }
-        
-            ReadUserKey();
         }
 
         public void ReadUserKey() {
@@ -54,7 +59,7 @@ namespace JuegoDeCartas {
             do {
                 tecla = Console.ReadKey(true);
                 if (tecla.Key == ConsoleKey.RightArrow) {
-                    if (selectedCard < 6) {//Esta condición es para que selectedCard NO tome un valor mayor al index del array deckP1
+                    if (selectedCard < 6 && selectedCard < deckP1.Count-1) {//Esta condición es para que selectedCard NO tome un valor mayor al index del array deckP1
                         selectedCard++;
                         FocusIn(selectedCard);
                     }
@@ -73,7 +78,7 @@ namespace JuegoDeCartas {
         }
 
         public void FocusIn(int selectedCard) {
-            int y = 28;
+            int y = 29;
             int index = 0;
             int c = 0;
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -84,7 +89,7 @@ namespace JuegoDeCartas {
             }
 
             foreach (int idCard in deckP1) {
-                y = 28;
+                y = 29;
                 Console.ForegroundColor = ConsoleColor.White;
                 if (c < 7) {
                     if (index != selectedCard) {//Si el index = selectedCard, no entrará a esta condición, pues no queremos que la carta seleccionada se pinte blanco.
@@ -119,7 +124,7 @@ namespace JuegoDeCartas {
 
         public void UpdateScreen() {
             Pantalla pantalla = new Pantalla();
-            Thread.Sleep(5000);
+            Thread.Sleep(2500);
             Console.Clear();
             pantalla.InGame();
             ShowCardsP1();

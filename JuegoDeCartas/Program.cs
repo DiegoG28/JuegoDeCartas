@@ -13,6 +13,7 @@ namespace JuegoDeCartas {
             Pantalla pantalla = new Pantalla();
 
             //pantalla.ShowFirstScreen();
+            //pantalla.SplashScreen();
             Console.Clear();
             pantalla.InGame();
 

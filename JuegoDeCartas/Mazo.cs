@@ -52,14 +52,5 @@ namespace JuegoDeCartas {
                 shuffledDeck.Add(idRandom);
             }
         }
-
-
-        public void PrintDeck() {
-            for (int column = 0; column < 1; column++) {
-                for (int row = 0; row < 14; row++) {
-                    Console.WriteLine(deck[row, column]);
-                }
-            }
-        }
     }
 }
