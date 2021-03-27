@@ -7,19 +7,20 @@ namespace JuegoDeCartas {
     class Program {
         static void Main(string[] args) {
             Console.SetWindowSize(150, 44);
-            Console.SetBufferSize(150, 44);
             Mazo mazo = new Mazo();
             Jugador player = new Jugador();
             Pantalla pantalla = new Pantalla();
 
-            //pantalla.ShowFirstScreen();
+            Console.SetBufferSize(150, 44);
             //pantalla.SplashScreen();
             Console.Clear();
-            pantalla.InGame();
+            //pantalla.ShowFirstScreen();
+            Console.Clear();
 
             mazo.ReadCards();
             mazo.ShuffleCards();
             player.DealCards();
+            pantalla.InGame();
             player.ShowCardsP1();
 
             Console.ReadLine();
