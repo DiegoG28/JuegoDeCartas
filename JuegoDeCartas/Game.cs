@@ -8,10 +8,11 @@ namespace JuegoDeCartas {
             Mazo mazo = new Mazo();
             Jugador player = new Jugador();
             Pantalla pantalla = new Pantalla();
+            Console.CursorVisible = false;
             mazo.ReadCards();//Lee las cartas
             mazo.ShuffleCards();//Barajea las cartas
             player.DealCards();//Reparte las cartas
-
+            Console.SetBufferSize(150, 44);
             pantalla.SplashScreen();//Activa la pantalla de carga
             Console.Clear();
             pantalla.ShowMenu();//Activa el menú del juego
