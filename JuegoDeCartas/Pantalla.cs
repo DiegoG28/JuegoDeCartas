@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Media;
 using System.Text;
 using System.Threading;
 
 namespace JuegoDeCartas {
     class Pantalla : Dibujos {
 
-        public void ShowFirstScreen() {
+        public void ShowDealScreen() {
             int pos = 5;
             for (int i = 0; i < Torrecita.Length; i++) {
                 pos++;
@@ -35,11 +36,9 @@ namespace JuegoDeCartas {
                 Console.Write("."); Thread.Sleep(500);
                 Console.SetCursorPosition(78, 25);
                 Console.WriteLine("   ");
-
             }
         }
-
-        public void InGame() {
+        public void ShowTowers() {
             int pos = 0;
             for (int i = 0; i < Torrecita.Length; i++) {
                 pos++;
@@ -53,9 +52,146 @@ namespace JuegoDeCartas {
                 Console.WriteLine(Torrecita[i]);
             }
 
-            SaveNumbers();//Guardamos dibujos de los números que usaremos a continuación
+            DrawNumbers();//Guardamos dibujos de los números que usaremos a continuación
             PrintPlayerHP(Jugador.playerHP / 1000 % 10, Jugador.playerHP / 100 % 10, Jugador.playerHP / 10 % 10, Jugador.playerHP % 10);
             PrintBotHP(Jugador.botHP / 1000 % 10, Jugador.botHP / 100 % 10, Jugador.botHP / 10 % 10, Jugador.botHP % 10);
+        }
+        public void ShowMenu() {
+            int pos = 2;
+            for (int i = 0; i < Towerdes.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(1, pos);
+                Console.WriteLine(Towerdes[i]);
+            }
+            pos = 14;
+            for (int i = 0; i < Torrecita.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(19, pos);
+                Console.WriteLine(Torrecita[i]);
+            }
+            pos = 14;
+            for (int i = 0; i < Torrecita.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(119, pos);
+                Console.WriteLine(Torrecita[i]);
+            }
+            pos = 15;
+            for (int i = 0; i < Start.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(51, pos);
+                Console.WriteLine(Start[i]);
+            }
+            pos = 27;
+            for (int i = 0; i < Exit.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(51, pos);
+                Console.WriteLine(Exit[i]);
+            }
+
+            SoundPlayer sound = new SoundPlayer("sonidito.wav");
+            bool ejecutar = false;
+            for (int k = 0; ;) {
+                opciones(k);
+                if (ejecutar) {
+                    return;
+                }
+                ConsoleKeyInfo cki = Console.ReadKey(true);
+                switch (cki.Key) {
+                    case ConsoleKey.UpArrow: k--; break;
+                    case ConsoleKey.DownArrow: k++; break;
+                    case ConsoleKey.Enter: ejecutar = true; break;
+                }
+                if (k < 1) k = 2; else if (k > 2) k = 1;
+                if (ejecutar) {
+                    switch (k) {
+                        case 1: Console.SetCursorPosition(62, 12); k = 3; sound.PlaySync(); break;
+                        case 2: Console.Clear(); Console.SetCursorPosition(62, 12); k = 4; /*Environment.Exit(0);*/ break;
+                        case 3: Console.Clear(); break;
+                    }
+                }
+            }
+            void opciones(int k) {
+                if (k == 1) {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    pos = 17;
+                    for (int i = 0; i < Startt.Length; i++) {
+                        pos++;
+                        Console.SetCursorPosition(55, pos);
+                        Console.WriteLine(Startt[i]);
+                    }
+                }
+                if (k == 2) {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    pos = 17;
+                    for (int i = 0; i < Startt.Length; i++) {
+                        pos++;
+                        Console.SetCursorPosition(55, pos);
+                        Console.WriteLine(Startt[i]);
+                    }
+                }
+                if (k == 2) {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    pos = 29;
+                    for (int i = 0; i < Exitt.Length; i++) {
+                        pos++;
+                        Console.SetCursorPosition(59, pos);
+                        Console.WriteLine(Exitt[i]);
+                    }
+                }
+                if (k == 1) {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    pos = 29;
+                    for (int i = 0; i < Exitt.Length; i++) {
+                        pos++;
+                        Console.SetCursorPosition(59, pos);
+                        Console.WriteLine(Exitt[i]);
+                    }
+                }
+                if (k == 3) {
+                    Console.Clear();
+                    ShowDealScreen();
+                }
+                if (k == 4) {
+                    Console.Clear();
+                    Environment.Exit(0);
+                }
+            }
+        }
+        public void ShowLostScreen() {
+            SoundPlayer sound = new SoundPlayer("abucheo.wav");
+            Console.ForegroundColor = ConsoleColor.Red;
+            int pos;
+            pos = 2;
+            for (int i = 0; i < Torrecitaff.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(69, pos);
+                Console.WriteLine(Torrecitaff[i]);
+            }
+            pos = 28;
+            for (int i = 0; i < base.Lost.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(42, pos);
+                Console.WriteLine(base.Lost[i]);
+            }
+            sound.PlaySync();
+        }
+        public void ShowWonScreen() {
+            SoundPlayer sound = new SoundPlayer("aplausos.wav");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            int pos;
+            pos = 2;
+            for (int i = 0; i < Torrecita.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(69, pos);
+                Console.WriteLine(Torrecita[i]);
+            }
+            pos = 28;
+            for (int i = 0; i < Won.Length; i++) {
+                pos++;
+                Console.SetCursorPosition(45, pos);
+                Console.WriteLine(Won[i]);
+            }
+            sound.PlaySync();
         }
 
         public static void PrintPlayerHP(int d1, int d2, int d3, int d4) {

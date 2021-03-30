@@ -8,8 +8,8 @@ namespace JuegoDeCartas {
     class Jugador : Mazo {
         ArrayList deckP1 = new ArrayList();
         public static ArrayList deckP2 = new ArrayList();
-        public static int playerHP=2000;
-        public static int botHP=4000;
+        public static int playerHP=1000;
+        public static int botHP=1000;
 
         public Jugador() {
             Console.CursorVisible = false;
@@ -126,8 +126,10 @@ namespace JuegoDeCartas {
             Pantalla pantalla = new Pantalla();
             Thread.Sleep(2500);
             Console.Clear();
-            pantalla.InGame();
-            ShowCardsP1();
+            if (!Combate.CheckHP()) {
+                pantalla.ShowTowers();
+                ShowCardsP1();
+            }
         }
 
     }
