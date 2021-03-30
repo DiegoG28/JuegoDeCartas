@@ -84,10 +84,10 @@ namespace JuegoDeCartas {
         public static bool CheckHP() {
             bool endGame = false;
             Pantalla finalScreen = new Pantalla();
-            if (Jugador.playerHP <= 0) {
+            if (Jugador.playerHP <= 0 || Jugador.deckP1.Count==0) {
                 finalScreen.ShowLostScreen();
                 endGame = true;
-            }else if (Jugador.botHP <= 0) {
+            }else if (Jugador.botHP <= 0 || Jugador.deckP1.Count==0) {
                 finalScreen.ShowWonScreen();
                 endGame = true;
             }

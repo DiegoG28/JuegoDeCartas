@@ -88,7 +88,7 @@ namespace JuegoDeCartas {
                 Console.WriteLine(Exit[i]);
             }
 
-            SoundPlayer sound = new SoundPlayer("sonidito.wav");
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\sonidito.wav");
             bool ejecutar = false;
             for (int k = 0; ;) {
                 opciones(k);
@@ -158,7 +158,7 @@ namespace JuegoDeCartas {
             }
         }
         public void ShowLostScreen() {
-            SoundPlayer sound = new SoundPlayer("abucheo.wav");
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\abucheo.wav");
             Console.ForegroundColor = ConsoleColor.Red;
             int pos;
             pos = 2;
@@ -176,7 +176,7 @@ namespace JuegoDeCartas {
             sound.PlaySync();
         }
         public void ShowWonScreen() {
-            SoundPlayer sound = new SoundPlayer("aplausos.wav");
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\aplausos.wav");
             Console.ForegroundColor = ConsoleColor.Yellow;
             int pos;
             pos = 2;

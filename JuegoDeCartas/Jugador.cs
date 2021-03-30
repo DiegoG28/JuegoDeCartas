@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace JuegoDeCartas {
     class Jugador : Mazo {
-        ArrayList deckP1 = new ArrayList();
+        public static ArrayList deckP1 = new ArrayList();
         public static ArrayList deckP2 = new ArrayList();
         public static int playerHP=1000;
         public static int botHP=1000;
@@ -47,9 +47,6 @@ namespace JuegoDeCartas {
                 }
 
                 ReadUserKey();
-            } else {
-                Console.Clear();
-                Console.WriteLine("En construcción...");
             }
         }
 
