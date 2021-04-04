@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Collections;
+using System.Media;
 
 namespace JuegoDeCartas {
     class Jugador : Mazo {
@@ -55,6 +56,7 @@ namespace JuegoDeCartas {
 
         public void ReadUserKey() {
             ConsoleKeyInfo tecla;
+            SoundPlayer selectSound = new SoundPlayer("..\\..\\..\\sounds\\cardSelect.wav");
             int selectedCard = 0;//Será usada como posición para determinar los valores de deckP1
             do {
                 tecla = Console.ReadKey(true);
@@ -63,12 +65,14 @@ namespace JuegoDeCartas {
                         selectedCard++;
                         FocusIn(selectedCard);
                     }
+                    selectSound.Play();
                 }
                 if (tecla.Key == ConsoleKey.LeftArrow) {
                     if (selectedCard > 0) {
                         selectedCard--;
                         FocusIn(selectedCard);
                     }
+                    selectSound.Play();
                 }
                 if (tecla.Key == ConsoleKey.Enter) {
                     UseCard(selectedCard);
