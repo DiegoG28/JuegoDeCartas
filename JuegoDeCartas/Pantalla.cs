@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Media;
 using System.Text;
@@ -10,31 +12,31 @@ namespace JuegoDeCartas {
     class Pantalla : Dibujos {
 
         public void ShowDealScreen() {
-            int pos = 5;
+            int pos = 10;
             for (int i = 0; i < Torrecita.Length; i++) {
                 pos++;
                 Console.SetCursorPosition(20, pos);
                 Console.WriteLine(Torrecita[i]);
             }
-            pos = 5;
+            pos = 10;
             for (int i = 0; i < Torrecita.Length; i++) {
                 pos++;
                 Console.SetCursorPosition(115, pos);
                 Console.WriteLine(Torrecita[i]);
             }
 
-            pos = 10;
+            pos = 15;
             for (int i = 0; i < Vss.Length; i++) {
                 pos++;
                 Console.SetCursorPosition(55, pos);
                 Console.WriteLine(Vss[i]);
             }
-            for (int i = 0; i < 3; i++) {
-                Console.SetCursorPosition(67, 25);
+            for (int i = 0; i < 2; i++) {
+                Console.SetCursorPosition(67, 30);
                 Console.Write("Repartiendo cartas."); Thread.Sleep(1000);
                 Console.Write("."); Thread.Sleep(500);
                 Console.Write("."); Thread.Sleep(500);
-                Console.SetCursorPosition(78, 25);
+                Console.SetCursorPosition(85, 30);
                 Console.WriteLine("   ");
             }
         }
@@ -88,7 +90,7 @@ namespace JuegoDeCartas {
                 Console.WriteLine(Exit[i]);
             }
 
-            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\sonidito.wav");
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\start.wav");
             bool ejecutar = false;
             for (int k = 0; ;) {
                 opciones(k);
@@ -163,11 +165,13 @@ namespace JuegoDeCartas {
                 if (k == 3) {
                     Console.Clear();
                     ShowDealScreen();
+                    Thread.Sleep(1000);
+                    Gif();
                 }
             }
         }
-        public void ShowLostScreen() {
-            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\abucheo.wav");
+        public void ShowLoseScreen() {
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\lose.wav");
             Console.ForegroundColor = ConsoleColor.Red;
             int pos;
             pos = 2;
@@ -182,11 +186,11 @@ namespace JuegoDeCartas {
                 Console.SetCursorPosition(42, pos);
                 Console.WriteLine(base.Lost[i]);
             }
+            sound.PlaySync();
             EndButton();
-            //sound.PlaySync();
         }
-        public void ShowWonScreen() {
-            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\aplausos.wav");
+        public void ShowWinScreen() {
+            SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\win.wav");
             Console.ForegroundColor = ConsoleColor.Yellow;
             int pos;
             pos = 2;
@@ -201,7 +205,7 @@ namespace JuegoDeCartas {
                 Console.SetCursorPosition(45, pos);
                 Console.WriteLine(Won[i]);
             }
-            //sound.PlaySync();
+            sound.PlaySync();
             EndButton();
         }
         public void EndButton() {
@@ -231,8 +235,6 @@ namespace JuegoDeCartas {
                 }
             }
         }
-
-
         public static void PrintPlayerHP(int d1, int d2, int d3, int d4) {
             Console.ForegroundColor = ConsoleColor.Red;
             int y = 25;
@@ -266,7 +268,6 @@ namespace JuegoDeCartas {
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-
         public static void PrintBotHP(int d1, int d2, int d3, int d4) {
             Console.ForegroundColor = ConsoleColor.Red;
             int y = 25;
@@ -300,7 +301,6 @@ namespace JuegoDeCartas {
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-
         public void SplashScreen() {
             int pos;
             Console.CursorVisible = false;
@@ -394,6 +394,47 @@ namespace JuegoDeCartas {
             Thread.Sleep(600);
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
+        }
+        public void Gif() {
+            Image image = Image.FromFile(@"..\\..\\..\\sounds\\wans.gif");
+
+            FrameDimension dimension = new FrameDimension(
+                               image.FrameDimensionsList[0]);
+            int frameCount = image.GetFrameCount(dimension);
+            StringBuilder sb;
+
+            // Remember cursor position
+            int left = Console.WindowLeft, top = Console.WindowTop;
+            int time = 0;
+            char[] chars = { '#', '#', '@', '%', '=', '+',
+                         '*', ':', '-', ' ', ' ' };
+            for (int i = 0; ; i = (i + 1) % frameCount) {
+
+                time++;
+                sb = new StringBuilder();
+                image.SelectActiveFrame(dimension, i);
+
+                for (int h = 0; h < image.Height; h++) {
+                    for (int w = 0; w < image.Width; w++) {
+
+                        Color cl = ((Bitmap)image).GetPixel(w, h);
+                        int gray = (cl.R + cl.G + cl.B) / 3;
+                        int index = (gray * (chars.Length - 1)) / 255;
+
+                        sb.Append(chars[index]);
+                    }
+
+                    sb.Append('\n');
+
+                }
+                Console.SetCursorPosition(left, top);
+                Console.Write(sb.ToString());
+
+                System.Threading.Thread.Sleep(200);
+                if (time >= 20) {
+                    break;
+                }
+            }
         }
     }
 }

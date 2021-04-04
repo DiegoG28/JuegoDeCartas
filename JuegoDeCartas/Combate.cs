@@ -70,7 +70,7 @@ namespace JuegoDeCartas {
                     Jugador.playerHP = Heal(Jugador.playerHP, playerPower);
                     Pantalla.PrintPlayerHP(Jugador.playerHP / 1000 % 10, Jugador.playerHP / 100 % 10, Jugador.playerHP / 10 % 10, Jugador.playerHP % 10);
                     healSound.Play();
-                    Thread.Sleep(1500);
+                    Thread.Sleep(2500);
                     atkSound.Play();
                     Jugador.playerHP = DoDamage(Jugador.playerHP, botPower);
                     break;
@@ -79,7 +79,7 @@ namespace JuegoDeCartas {
                     Jugador.botHP = Heal(Jugador.botHP, botPower);
                     Pantalla.PrintBotHP(Jugador.botHP / 1000 % 10, Jugador.botHP / 100 % 10, Jugador.botHP / 10 % 10, Jugador.botHP % 10);
                     healSound.Play();
-                    Thread.Sleep(1500);
+                    Thread.Sleep(2500);
                     atkSound.Play();
                     Jugador.botHP = DoDamage(Jugador.botHP, playerPower);
                     break;
@@ -102,10 +102,10 @@ namespace JuegoDeCartas {
             bool endGame = false;
             Pantalla finalScreen = new Pantalla();
             if (Jugador.playerHP <= 0 || Jugador.deckP1.Count==0) {
-                finalScreen.ShowLostScreen();
+                finalScreen.ShowLoseScreen();
                 endGame = true;
             }else if (Jugador.botHP <= 0 || Jugador.deckP1.Count==0) {
-                finalScreen.ShowWonScreen();
+                finalScreen.ShowWinScreen();
                 endGame = true;
             }
             return endGame;
