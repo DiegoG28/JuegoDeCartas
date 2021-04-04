@@ -8,11 +8,14 @@ namespace JuegoDeCartas {
     class Jugador : Mazo {
         public static ArrayList deckP1 = new ArrayList();
         public static ArrayList deckP2 = new ArrayList();
-        public static int playerHP=1000;
-        public static int botHP=1000;
+        public static int playerHP;
+        public static int botHP;
 
         public Jugador() {
             Console.CursorVisible = false;
+            playerHP = 2000;
+            botHP = 2000;
+            shuffledDeck.Clear();
         }
         public void DealCards() {
             bool dealP1 = true;

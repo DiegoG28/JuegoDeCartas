@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Media;
 
 namespace JuegoDeCartas {
     class Combate : Carta {
+        SoundPlayer atkSound = new SoundPlayer("..\\..\\..\\sounds\\SoundAtack.wav");
+        SoundPlayer defSound = new SoundPlayer("..\\..\\..\\sounds\\SoundDef.wav");
+        SoundPlayer healSound = new SoundPlayer("..\\..\\..\\sounds\\SoundHp.wav");
 
         public Combate(int playerCard, int botCard) {
 
@@ -20,6 +24,7 @@ namespace JuegoDeCartas {
 
             switch(battleType){
                 case "ataque-ataque":
+                    atkSound.Play();
                     if (playerPower > botPower) {
                         Jugador.botHP = DoDamage(Jugador.botHP, playerPower);
                         Jugador.playerHP = DoDamage(Jugador.playerHP, botPower/2);//Aquel que tenga la carta con mas poder, recibirá menos daño del que indique la carta del contrincante
@@ -30,53 +35,65 @@ namespace JuegoDeCartas {
                     break;
 
                 case "defensa-defensa":
+                    defSound.Play();
                     break;
 
                 case "curación-curación":
+                    healSound.Play();
                     Jugador.playerHP = Heal(Jugador.playerHP, playerPower);
                     Jugador.botHP = Heal(Jugador.botHP, botPower);
                     break;
 
                 case "defensa-ataque":
                     if (playerPower > botPower) {
-
+                        defSound.Play();
                     } else if (playerPower < botPower) {
+                        atkSound.Play();
                         Jugador.playerHP = DoDamage(Jugador.playerHP, botPower - playerPower);
                     } else if (playerPower == botPower) {
-
+                        defSound.Play();
                     }
                     break;
 
                 case "ataque-defensa":
                     if (botPower > playerPower) {
-
+                        defSound.Play();
                     } else if (botPower < playerPower) {
+                        atkSound.Play();
                         Jugador.botHP = DoDamage(Jugador.botHP, playerPower - botPower);
                     } else if (playerPower == botPower) {
-
+                        defSound.Play();
                     }
                     break;
 
                 case "curación-ataque":
                     Jugador.playerHP = Heal(Jugador.playerHP, playerPower);
                     Pantalla.PrintPlayerHP(Jugador.playerHP / 1000 % 10, Jugador.playerHP / 100 % 10, Jugador.playerHP / 10 % 10, Jugador.playerHP % 10);
+                    healSound.Play();
                     Thread.Sleep(1500);
+                    atkSound.Play();
                     Jugador.playerHP = DoDamage(Jugador.playerHP, botPower);
                     break;
 
                 case "ataque-curación":
                     Jugador.botHP = Heal(Jugador.botHP, botPower);
                     Pantalla.PrintBotHP(Jugador.botHP / 1000 % 10, Jugador.botHP / 100 % 10, Jugador.botHP / 10 % 10, Jugador.botHP % 10);
+                    healSound.Play();
                     Thread.Sleep(1500);
+                    atkSound.Play();
                     Jugador.botHP = DoDamage(Jugador.botHP, playerPower);
                     break;
 
                 case "curación-defensa":
                     Jugador.playerHP = Heal(Jugador.playerHP, playerPower);
+                    Pantalla.PrintPlayerHP(Jugador.playerHP / 1000 % 10, Jugador.playerHP / 100 % 10, Jugador.playerHP / 10 % 10, Jugador.playerHP % 10);
+                    healSound.Play();
                     break;
 
                 case "defensa-curación":
                     Jugador.botHP = Heal(Jugador.botHP, botPower);
+                    Pantalla.PrintBotHP(Jugador.botHP / 1000 % 10, Jugador.botHP / 100 % 10, Jugador.botHP / 10 % 10, Jugador.botHP % 10);
+                    healSound.Play();
                     break;
             }
         }

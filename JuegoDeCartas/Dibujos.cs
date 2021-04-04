@@ -134,6 +134,15 @@ namespace JuegoDeCartas {
             "   ██    ██    ██ ██    ██        ██       ██    ██       ██    ██   ",
             "   ██    ████████ ████████        ████████ ████████ ████████    ██   ",
         };
+
+        private string[] continuar =
+        {
+            "╔═══════════════════════════════╗",
+            "║   _   _      __            _  ║",
+            "║  / ` / / /|/ /  / /|/ / / /_` ║",
+            "║ /_, /_/ / | /  / / | /_/ /_   ║",
+            "╚═══════════════════════════════╝"
+        };
         public string[] Torrecita { get => torrecita; set => torrecita = value; }
         public string[] Torrecitaff { get => torrecitaff; set => torrecitaff = value; }
         public string[] Towerdes { get => towerdes; set => towerdes = value; }
@@ -146,6 +155,7 @@ namespace JuegoDeCartas {
 
         public static string[,] numbers = new string[3, 10];
         public string[] Vss { get => vss; set => vss = value; }
+        public string[] Continuar { get => continuar; set => continuar = value; }
 
         public void DrawNumbers() {
 

@@ -42,7 +42,7 @@ namespace JuegoDeCartas {
         public void ShuffleCards() {
             Random generate = new Random();
 
-            int idRandom;
+            int idRandom;   
             for (int i = 0; i < totalCards; i++) {
                 idRandom = generate.Next(0, totalCards);
                 //Mientras shuffledDeck contenga el valor de idRandom, generará uno nuevo hasta que ese nuevo valor no esté dentro de shuffledDeck, así nos aseguramos que no hayan repetidos.

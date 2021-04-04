@@ -1,56 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="JuegoDeCartas.Bot">
-    <Position X="7" Y="4.75" Width="1.5" />
+    <Position X="7.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAA=</HashCode>
       <FileName>Bot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JuegoDeCartas.Carta">
-    <Position X="4" Y="4" Width="1.5" />
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEBAQEAAAAAAAAAAAA=</HashCode>
       <FileName>Carta.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JuegoDeCartas.Combate">
-    <Position X="1.25" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAAAACAAAAKAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Combate.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JuegoDeCartas.Dibujos">
-    <Position X="10.5" Y="1.75" Width="1.5" />
+    <Position X="9.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AoAAAAKAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAACAACAAgAAgAAAAIBgAAIAYAACAIAEAgCCBAAA=</HashCode>
       <FileName>Dibujos.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="JuegoDeCartas.Game">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="JuegoDeCartas.Jugador">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAGAAAAIAAACAQABAAAAABAAAAAAEAQA=</HashCode>
       <FileName>Jugador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JuegoDeCartas.Mazo">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAIAAAAAAAAAABAAQAAAQAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Mazo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="JuegoDeCartas.Pantalla">
-    <Position X="10.5" Y="4.5" Width="1.5" />
+    <Position X="11.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAACAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAAAAACAgAAAAACACAAAAAAABAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Pantalla.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="JuegoDeCartas.Program" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+  <Class Name="JuegoDeCartas.Program">
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>

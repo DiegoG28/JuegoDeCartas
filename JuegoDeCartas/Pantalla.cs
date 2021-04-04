@@ -56,7 +56,7 @@ namespace JuegoDeCartas {
             PrintPlayerHP(Jugador.playerHP / 1000 % 10, Jugador.playerHP / 100 % 10, Jugador.playerHP / 10 % 10, Jugador.playerHP % 10);
             PrintBotHP(Jugador.botHP / 1000 % 10, Jugador.botHP / 100 % 10, Jugador.botHP / 10 % 10, Jugador.botHP % 10);
         }
-        public void ShowMenu() {
+        public void ShowMenu(bool secondRound) {
             int pos = 2;
             for (int i = 0; i < Towerdes.Length; i++) {
                 pos++;
@@ -99,19 +99,32 @@ namespace JuegoDeCartas {
                 switch (cki.Key) {
                     case ConsoleKey.UpArrow: k--; break;
                     case ConsoleKey.DownArrow: k++; break;
-                    case ConsoleKey.Enter: ejecutar = true; break;
+                    case ConsoleKey.Enter: 
+                        if (!secondRound) {
+                            ejecutar = true;
+                        } break;
                 }
-                if (k < 1) k = 2; else if (k > 2) k = 1;
+                if (k < 0) k = 1; else if (k > 1) k = 0;
                 if (ejecutar) {
                     switch (k) {
-                        case 1: Console.SetCursorPosition(62, 12); k = 3; sound.PlaySync(); break;
-                        case 2: Console.Clear(); Console.SetCursorPosition(62, 12); k = 4; /*Environment.Exit(0);*/ break;
+                        case 0: Console.SetCursorPosition(62, 12);
+                                if (!secondRound) {
+                                    k = 3;
+                                    sound.PlaySync();
+                                 } else {
+                                    k = -1;
+                                } 
+                                break;
+                        case 1: Console.Clear(); Console.SetCursorPosition(62, 12); k = 4; Environment.Exit(0); break;
                         case 3: Console.Clear(); break;
                     }
                 }
+                if (secondRound)
+                    secondRound = false;
             }
+
             void opciones(int k) {
-                if (k == 1) {
+                if (k==0) {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     pos = 17;
                     for (int i = 0; i < Startt.Length; i++) {
@@ -120,7 +133,7 @@ namespace JuegoDeCartas {
                         Console.WriteLine(Startt[i]);
                     }
                 }
-                if (k == 2) {
+                if (k == 1) {
                     Console.ForegroundColor = ConsoleColor.Gray;
                     pos = 17;
                     for (int i = 0; i < Startt.Length; i++) {
@@ -129,7 +142,7 @@ namespace JuegoDeCartas {
                         Console.WriteLine(Startt[i]);
                     }
                 }
-                if (k == 2) {
+                if (k == 1) {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     pos = 29;
                     for (int i = 0; i < Exitt.Length; i++) {
@@ -138,7 +151,7 @@ namespace JuegoDeCartas {
                         Console.WriteLine(Exitt[i]);
                     }
                 }
-                if (k == 1) {
+                if (k == 0) {
                     Console.ForegroundColor = ConsoleColor.Gray;
                     pos = 29;
                     for (int i = 0; i < Exitt.Length; i++) {
@@ -150,10 +163,6 @@ namespace JuegoDeCartas {
                 if (k == 3) {
                     Console.Clear();
                     ShowDealScreen();
-                }
-                if (k == 4) {
-                    Console.Clear();
-                    Environment.Exit(0);
                 }
             }
         }
@@ -173,7 +182,8 @@ namespace JuegoDeCartas {
                 Console.SetCursorPosition(42, pos);
                 Console.WriteLine(base.Lost[i]);
             }
-            sound.PlaySync();
+            EndButton();
+            //sound.PlaySync();
         }
         public void ShowWonScreen() {
             SoundPlayer sound = new SoundPlayer("..\\..\\..\\sounds\\aplausos.wav");
@@ -191,8 +201,37 @@ namespace JuegoDeCartas {
                 Console.SetCursorPosition(45, pos);
                 Console.WriteLine(Won[i]);
             }
-            sound.PlaySync();
+            //sound.PlaySync();
+            EndButton();
         }
+        public void EndButton() {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            int x = 58, y = 35;
+            bool gray = true;
+
+            while (x!=0) {
+                if (Console.KeyAvailable) {
+                    return;
+                }
+                Thread.Sleep(700);
+                for (int i = 0; i < Continuar.Length; i++) {
+                    y++;
+
+                    Console.SetCursorPosition(x, y);
+                    Console.WriteLine(Continuar[i]);
+                }
+                x = 58;
+                y = 35;
+                if (gray) {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    gray = false;
+                } else {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    gray = true;
+                }
+            }
+        }
+
 
         public static void PrintPlayerHP(int d1, int d2, int d3, int d4) {
             Console.ForegroundColor = ConsoleColor.Red;
