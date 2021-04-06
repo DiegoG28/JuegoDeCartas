@@ -17,6 +17,8 @@ namespace JuegoDeCartas {
             playerHP = 2500;
             botHP = 2500;
             shuffledDeck.Clear();
+            deckP1.Clear();
+            deckP2.Clear();
         }
         public void DealCards() {
             bool dealP1 = true;
