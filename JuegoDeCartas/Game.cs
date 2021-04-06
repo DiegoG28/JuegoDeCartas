@@ -16,8 +16,8 @@ namespace JuegoDeCartas {
             player.DealCards();//Reparte las cartas
             Console.SetBufferSize(150, 44);
 
-            //if (!secondRound)
-                //pantalla.SplashScreen();//Activa la pantalla de carga
+            if (!secondRound)
+                pantalla.SplashScreen();//Activa la pantalla de carga
             Console.Clear();
             pantalla.ShowMenu(secondRound);//Activa el menú del juego
             Console.Clear();

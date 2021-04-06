@@ -14,8 +14,8 @@ namespace JuegoDeCartas {
 
         public Jugador() {
             Console.CursorVisible = false;
-            playerHP = 1500;
-            botHP = 1000;
+            playerHP = 2500;
+            botHP = 2500;
             shuffledDeck.Clear();
         }
         public void DealCards() {
