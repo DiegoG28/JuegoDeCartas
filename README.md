@@ -1,5 +1,6 @@
 # JuegoDeCartas
 VIDEO PROMOCIONAL: https://www.youtube.com/watch?v=rhFUWRf4Cg0
+
 EXPOSICIÓN DEL PROYECTO: https://www.youtube.com/watch?v=fPTVtlEJxUI
 
 Primera versión del proyecto funcional.
