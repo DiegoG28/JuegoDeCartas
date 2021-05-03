@@ -1,4 +1,7 @@
 # JuegoDeCartas
+VIDEO PROMOCIONAL: https://www.youtube.com/watch?v=rhFUWRf4Cg0
+EXPOSICIÓN DEL PROYECTO: https://www.youtube.com/watch?v=fPTVtlEJxUI
+
 Primera versión del proyecto funcional.
 <img width="989" alt="2021-03-30_00h03_57" src="https://user-images.githubusercontent.com/81261602/112936827-29a08780-90ec-11eb-9005-32a67b98e198.png">
 <img width="981" alt="2021-03-30_00h04_16" src="https://user-images.githubusercontent.com/81261602/112936833-2b6a4b00-90ec-11eb-9fb0-2fccc6e8ee03.png">
